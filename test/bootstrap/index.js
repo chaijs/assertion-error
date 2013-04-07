@@ -1,35 +1,56 @@
 /*!
- * Attach chai to global should
+ * Simple test runner.
  */
 
-global.chai = require('chai');
-global.should = global.chai.should();
+var count = 0
+  , failures = []
+  , tests = [];
 
-/*!
- * Chai Plugins
- */
+global.runner = function (fn) {
+  fn();
 
-//global.chai.use(require('chai-spies'));
-//global.chai.use(require('chai-http'));
+  console.log('');
+  console.log('  Tests (%d)', tests.length);
+
+  tests.forEach(function (test) {
+    var err = false
+      , num = ++count;
+
+    try { test.fn(); }
+    catch (ex) { err = ex; }
+
+    if (err) {
+      console.log('  %d. [fail] %s', num, test.name);
+      failures.push({ num: num, err: err });
+    } else {
+      console.log('  %d. [pass] %s', num, test.name);
+    }
+  });
+
+  console.log('');
+  console.log('  Failures (%d)', failures.length);
+
+  failures.forEach(function (failure) {
+    console.log('  %d. %s', failure.num, failure.err.message);
+  });
+
+  console.log('');
+  process.exit(failures.length);
+}
+
+global.test = function (name, fn) {
+  tests.push({ name: name, fn: fn });
+};
+
+global.assert = function (pass, msg) {
+  if (!pass) {
+    throw new Error(msg);
+  }
+}
+
 
 /*!
  * Import project
  */
 
-global.assertion-error = require('../..');
-
-/*!
- * Helper to load internals for cov unit tests
- */
-
-function req (name) {
-  return process.env.assertion-error_COV
-    ? require('../../lib-cov/assertion-error/' + name)
-    : require('../../lib/assertion-error/' + name);
-}
-
-/*!
- * Load unexposed modules for unit tests
- */
-
-global.__assertion-error = {};
+global.AssertionError = require('../..');

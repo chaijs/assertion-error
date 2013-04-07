@@ -6,27 +6,14 @@ REPORTER = spec
 # Tests
 # 
 
-test: test-node test-browser 
+test: test-node
 
 test-node: 
 	@printf "\n  ==> [Node.js]"
-	@NODE_ENV=test ./node_modules/.bin/mocha \
-		--require ./test/bootstrap \
-		--reporter $(REPORTER) \
-		$(TESTS)
-
-test-browser: build
-	@printf "\n  ==> [Phantom.Js]"
-	@./node_modules/.bin/mocha-phantomjs \
-		--R ${REPORTER} \
-		./test/browser/index.html
+	@NODE_ENV=test node ./test/runner.js
 
 test-cov: lib-cov
-	@assertion-error_COV=1 NODE_ENV=test ./node_modules/.bin/mocha \
-		--require ./test/bootstrap \
-		--reporter html-cov \
-		$(TESTS) \
-		> coverage.html
+	@assertion-error_COV=1 NODE_ENV=test node ./test/runner.js
 
 #
 # Components
@@ -61,4 +48,4 @@ clean-cov:
 	@rm -f coverage.html
 
 
-.PHONY: clean clean-components clean-cov test test-cov test-node test-browser lib-cov
+.PHONY: clean clean-components clean-cov test test-cov test-node lib-cov
