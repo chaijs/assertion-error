@@ -1,6 +1,6 @@
-# assertion-error
+# assertion-error [![Build Status](https://travis-ci.org/qualiancy/assertion-error.png?branch=master)](https://travis-ci.org/qualiancy/assertion-error)
 
-> Extended JavaScript Error constructor for test and validation frameworks that implements standardized AssertionError specification.
+> Error constructor for test and validation frameworks that implements standardized AssertionError specification.
 
 ## Installation
 

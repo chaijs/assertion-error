@@ -1,8 +1,8 @@
 {
     "name": "assertion-error"
   , "repo": "qualiancy/assertion-error"
-  , "version": "0.0.0"
-  , "description": "Extended JavaScript Error constructor for test and validation frameworks that implements standardized AssertionError specification."
+  , "version": "0.1.0"
+  , "description": "Error constructor for test and validation frameworks that implements standardized AssertionError specification."
   , "license": "MIT"
   , "keywords": [
     ]
