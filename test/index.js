@@ -1,4 +1,10 @@
 /*!
+ * Include lib
+ */
+
+global.AssertionError = require('..');
+
+/*!
  * Simple test runner.
  */
 
@@ -6,8 +12,16 @@ var count = 0
   , failures = []
   , tests = [];
 
-global.runner = function (fn) {
-  fn();
+function test (name, fn) {
+  tests.push({ name: name, fn: fn });
+}
+
+function assert (pass, msg) {
+  if (!pass) throw new Error(msg);
+}
+
+global.suite = function (fn) {
+  fn(test, assert);
 
   console.log('');
   console.log('  Tests (%d)', tests.length);
@@ -36,21 +50,10 @@ global.runner = function (fn) {
 
   console.log('');
   process.exit(failures.length);
-}
-
-global.test = function (name, fn) {
-  tests.push({ name: name, fn: fn });
 };
 
-global.assert = function (pass, msg) {
-  if (!pass) {
-    throw new Error(msg);
-  }
-}
-
-
 /*!
- * Import project
+ * Load the tests
  */
 
-global.AssertionError = require('../..');
+require('./test');

@@ -5,10 +5,13 @@
   , "author": "Jake Luer <jake@qualiancy.com> (http://qualiancy.com)"
   , "license": "MIT"
   , "keywords": [
+        "test"
+      , "assertion"
+      , "assertion-error"
     ]
   , "repository": {
         "type": "git"
-      , "url": "git@github.com:qualiancy/assertion-error.git"
+      , "url": "git@github.com:chaijs/assertion-error.git"
     }
   , "engines": {
       "node": "*"

@@ -1,7 +1,4 @@
 
-TESTS = test/*.js
-REPORTER = spec
-
 #
 # Tests
 # 
@@ -9,43 +6,33 @@ REPORTER = spec
 test: test-node
 
 test-node: 
-	@printf "\n  ==> [Node.js]"
-	@NODE_ENV=test node ./test/runner.js
+	@printf "\n  ==> [Node.js]\n"
+	@NODE_ENV=test node ./test/index.js
 
-test-cov: lib-cov
-	@assertion-error_COV=1 NODE_ENV=test node ./test/runner.js
+test-browser:
+	@printf "\n  ==> [Browser]\n"
+	@make build
+	@printf "\n\n  Open 'test/index.html' in your browser to test.\n\n"
 
 #
 # Components
 # 
 
-build: components lib/*
+build: components
 	@./node_modules/.bin/component-build --dev
 
 components: component.json
 	@./node_modules/.bin/component-install --dev
 
 #
-# Coverage
-# 
-
-lib-cov:
-	@rm -rf lib-cov
-	@jscoverage lib lib-cov
-
-#
 # Clean up
 # 
 
-clean: clean-components clean-cov
+clean: clean-components 
 
 clean-components:
 	@rm -rf build
 	@rm -rf components
 
-clean-cov:
-	@rm -rf lib-cov
-	@rm -f coverage.html
-
-
-.PHONY: clean clean-components clean-cov test test-cov test-node lib-cov
+.PHONY: test test-node test-browser
+.PHONY: clean clean-components
