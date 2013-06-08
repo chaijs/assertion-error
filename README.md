@@ -1,4 +1,4 @@
-# assertion-error [![Build Status](https://travis-ci.org/qualiancy/assertion-error.png?branch=master)](https://travis-ci.org/qualiancy/assertion-error)
+# AssertionError [![Build Status](https://travis-ci.org/chaijs/assertion-error.png?branch=master)](https://travis-ci.org/chaijs/assertion-error)
 
 > Error constructor for test and validation frameworks that implements standardized AssertionError specification.
 
@@ -14,13 +14,13 @@
 
 `assertion-error` is available as a [component](https://github.com/component/component).
 
-    $ component install qualiancy/assertion-error
+    $ component install chaijs/assertion-error
 
 ## License
 
 (The MIT License)
 
-Copyright (c) 2012 Jake Luer <jake@qualiancy.com> (http://qualiancy.com)
+Copyright (c) 2013 Jake Luer <jake@qualiancy.com> (http://qualiancy.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
