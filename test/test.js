@@ -13,6 +13,10 @@ suite(function (test, assert) {
     assert(empty.message === 'Unspecified AssertionError', 'w/o err.message');
   });
 
+  test('stack', function() {
+    assert(typeof new AssertionError().stack === 'string');
+  });
+
   test('custom properties', function () {
     var err = new AssertionError('good message', {
         name: 'ShouldNotExist'
