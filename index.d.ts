@@ -1,11 +1,10 @@
-type AssertionError<T = {}> = Error & T & {
-    showDiff: boolean;
-};
+declare class AssertionError<T = {}> extends Error {
 
-interface AssertionErrorConstructor {
-    new<T = {}>(message: string, props?: T, ssf?: Function): AssertionError<T>;
+  public constructor(message: string, props?: T, ssf?: Function);
+
+  public toJSON(stack?: any): any;
+
+  [key: string]: any;
 }
-
-declare const AssertionError: AssertionErrorConstructor;
 
 export = AssertionError;
