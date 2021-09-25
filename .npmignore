@@ -1,10 +1,8 @@
 docs/
 test/
 build/
-components/
 support/
 coverage.html
-component.json
 lib-cov
 .travis.yml
 Makefile
