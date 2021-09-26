@@ -19,10 +19,11 @@
     },
     "main": "./index",
     "scripts": {
-        "test": "make test"
+        "test": "npm run test:node && npm run test:typescript",
+        "test:node": "NODE_ENV=test node ./test/index.js",
+        "test:typescript": "tsc test/typings.ts index.d.ts --noEmit"
     },
-    "dependencies": {},
     "devDependencies": {
-        "typescript": "^2.8.3"
+        "typescript": "^4.4.3"
     }
 }
