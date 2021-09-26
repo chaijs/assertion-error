@@ -1,4 +1,4 @@
-import AssertionError = require('../dist/index.js');
+import AssertionError from '../src/index'
 
 const str: string = "";
 let e: AssertionError;
