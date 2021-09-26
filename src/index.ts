@@ -30,7 +30,7 @@ function exclude(...args: string[]): (a: Record<string, unknown>, b?: {}) => Rec
 
 export default class AssertionError<T> extends Error {
   showDiff: boolean
-  [key: string]: unknown
+  [key: string]: any
 
   constructor(message: string, _props?: T, ssf?: Function) {
     super()
