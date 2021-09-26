@@ -1,4 +1,4 @@
-# AssertionError [![Build Status](https://travis-ci.org/chaijs/assertion-error.svg?branch=master)](https://travis-ci.org/chaijs/assertion-error)
+# AssertionError [![Build Status](https://github.com/chaijs/assertion-error/actions/workflows/nodejs.yml/badge.svg)](https://github.com/chaijs/assertion-error/actions/workflows/nodejs.yml) 
 
 > Error constructor for test and validation frameworks that implements standardized AssertionError specification.
 
