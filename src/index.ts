@@ -1,42 +1,10 @@
-/**
- * Return a function that will copy properties from
- * one object to another excluding any originally
- * listed. Returned function will create a new `{}`.
- *
- * @param {String} excluded properties ...
- * @return {Function}
- */
-function exclude(...args: string[]): (a: {}, b?: {}) => Record<string, unknown> {
-  var excludes = args
-
-  function excludeProps (res: Record<string, unknown>, obj: Record<string, unknown>) {
-    Object.keys(obj).forEach(function (key) {
-      if (!~excludes.indexOf(key)) res[key] = obj[key];
-    });
-  }
-
-  return function extendExclude () {
-    var args = [].slice.call(arguments)
-      , i = 0
-      , res = {};
-
-    for (; i < args.length; i++) {
-      excludeProps(res, args[i]);
-    }
-
-    return res;
-  };
-};
-
 export default class AssertionError<T> extends Error {
   name = 'AssertionError'
   showDiff: boolean
   [key: string]: any
 
-  constructor(message: string, _props?: T, ssf?: Function) {
-    super()
-    var extend = exclude('name', 'message', 'stack', 'constructor', 'toJSON')
-      , props = extend(_props || {});
+  constructor(message: string, props?: T, ssf?: Function) {
+    super(message)
 
     // default values
     this.message = message || 'Unspecified AssertionError';
@@ -44,7 +12,11 @@ export default class AssertionError<T> extends Error {
 
     // copy from properties
     for (var key in props) {
-      this[key] = props[key];
+      const propertiesNotToSet = ['name', 'message', 'stack', 'constructor', 'toJSON']
+      if (!propertiesNotToSet.includes(key)) {
+        // @ts-ignore
+        this[key] = props[key];
+      }
     }
 
     // capture stack trace
@@ -68,13 +40,13 @@ export default class AssertionError<T> extends Error {
    */
 
   toJSON(stack: boolean) {
-    var extend = exclude('constructor', 'toJSON', 'stack')
-      , props = extend({ name: this.name }, this);
+    const {...props} = this
 
     // include stack if exists and not turned off
     if (false !== stack && this.stack) {
       props.stack = this.stack;
     }
+    props.message = this.message
 
     return props;
   };
