@@ -6,7 +6,7 @@
  * @param {String} excluded properties ...
  * @return {Function}
  */
-function exclude(...args: string[]): (a: Record<string, unknown>, b?: Record<string, unknown>) => Record<string, unknown> {
+function exclude(...args: string[]): (a: Record<string, unknown>, b?: {}) => Record<string, unknown> {
   var excludes = Array.from(args);
 
   function excludeProps (res: Record<string, unknown>, obj: Record<string, unknown>) {
