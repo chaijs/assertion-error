@@ -4,8 +4,6 @@
 
 ## Installation
 
-### Node.js
-
-`assertion-error` is available on [npm](http://npmjs.org).
-
-    $ npm install assertion-error
+```
+$ npm install --save assertion-error
+```
