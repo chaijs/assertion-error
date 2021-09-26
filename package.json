@@ -4,7 +4,7 @@
     "description": "Error constructor for test and validation frameworks that implements standardized AssertionError specification.",
     "author": "Jake Luer <jake@qualiancy.com> (http://qualiancy.com)",
     "license": "MIT",
-    "types": "./index.d.ts",
+    "types": "./dist/index.d.ts",
     "keywords": [
         "test",
         "assertion",
@@ -17,13 +17,18 @@
     "engines": {
         "node": ">=12"
     },
+    "files": [
+        "dist"
+    ],
     "type": "module",
-    "module": "./index.js",
-    "main": "./index.js",
+    "module": "./dist/index.js",
+    "main": "./dist/index.js",
     "scripts": {
+        "build": "tsc",
+        "pretest": "npm run build",
         "test": "npm run test:node && npm run test:typescript",
         "test:node": "NODE_ENV=test node ./test/index.js",
-        "test:typescript": "tsc test/typings.ts index.d.ts --noEmit"
+        "test:typescript": "tsc test/typings.ts dist/index.d.ts --noEmit"
     },
     "devDependencies": {
         "typescript": "^4.4.3"
