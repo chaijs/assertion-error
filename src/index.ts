@@ -6,8 +6,8 @@
  * @param {String} excluded properties ...
  * @return {Function}
  */
-function exclude(...args: string[]): (a: Record<string, unknown>, b?: {}) => Record<string, unknown> {
-  var excludes = Array.from(args);
+function exclude(...args: string[]): (a: {}, b?: {}) => Record<string, unknown> {
+  var excludes = args
 
   function excludeProps (res: Record<string, unknown>, obj: Record<string, unknown>) {
     Object.keys(obj).forEach(function (key) {
@@ -29,6 +29,7 @@ function exclude(...args: string[]): (a: Record<string, unknown>, b?: {}) => Rec
 };
 
 export default class AssertionError<T> extends Error {
+  name = 'AssertionError'
   showDiff: boolean
   [key: string]: any
 
