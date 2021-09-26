@@ -10,12 +10,6 @@
 
     $ npm install assertion-error
 
-### Component
-
-`assertion-error` is available as a [component](https://github.com/component/component).
-
-    $ component install chaijs/assertion-error
-
 ## License
 
 (The MIT License)
