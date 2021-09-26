@@ -1,7 +1,7 @@
 import AssertionError from '../src/index'
 
 const str: string = "";
-let e: AssertionError;
+let e;
 
 function foo () { }
 
