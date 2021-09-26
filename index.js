@@ -39,8 +39,6 @@ function exclude () {
  * Primary Exports
  */
 
-module.exports = AssertionError;
-
 /**
  * ### AssertionError
  *
@@ -52,7 +50,7 @@ module.exports = AssertionError;
  * @param {callee} start stack function (optional)
  */
 
-function AssertionError (message, _props, ssf) {
+export default function AssertionError (message, _props, ssf) {
   var extend = exclude('name', 'message', 'stack', 'constructor', 'toJSON')
     , props = extend(_props || {});
 

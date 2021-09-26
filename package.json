@@ -15,9 +15,11 @@
         "url": "git@github.com:chaijs/assertion-error.git"
     },
     "engines": {
-        "node": "*"
+        "node": ">=12"
     },
-    "main": "./index",
+    "type": "module",
+    "module": "./index.js",
+    "main": "./index.js",
     "scripts": {
         "test": "npm run test:node && npm run test:typescript",
         "test:node": "NODE_ENV=test node ./test/index.js",
