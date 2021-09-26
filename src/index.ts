@@ -12,8 +12,7 @@ export default class AssertionError<T> extends Error {
 
     // copy from properties
     for (var key in props) {
-      const propertiesNotToSet = ['name', 'message', 'stack', 'constructor', 'toJSON']
-      if (!propertiesNotToSet.includes(key)) {
+      if (!this[key]) {
         // @ts-ignore
         this[key] = props[key];
       }
