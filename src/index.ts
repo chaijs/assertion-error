@@ -19,9 +19,8 @@ export default class AssertionError<T> extends Error {
     }
 
     // capture stack trace
-    ssf = ssf || AssertionError;
     if ((Error as any).captureStackTrace) {
-      (Error as any).captureStackTrace(this, ssf);
+      (Error as any).captureStackTrace(this, ssf || AssertionError);
     } else {
       try {
         throw new Error();
@@ -31,14 +30,8 @@ export default class AssertionError<T> extends Error {
     }
   }
 
-  /**
-   * Allow errors to be converted to JSON for static transfer.
-   *
-   * @param {Boolean} include stack (default: `true`)
-   * @return {Object} object that can be `JSON.stringify`
-   */
-
-  toJSON(stack: boolean) {
+  // Allow errors to be converted to JSON for static transfer.
+  toJSON(stack: boolean): Record<string, unknown> {
     const {...props} = this
 
     // include stack if exists and not turned off
