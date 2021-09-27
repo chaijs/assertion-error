@@ -12,7 +12,7 @@ export default class AssertionError<T> extends Error {
 
     // copy from properties
     for (var key in props) {
-      if (!this[key]) {
+      if (!(key in this)) {
         // @ts-ignore
         this[key] = props[key];
       }
