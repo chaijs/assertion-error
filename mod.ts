@@ -21,10 +21,12 @@ export class AssertionError<T> extends Error implements Result {
   constructor(public message = 'Unspecified AssertionError', props?: T, ssf?: Function) {
     super(message)
     if (canElideFrames && ssf) startStackFrames.set(this, ssf)
-    for (const key in props)
-      if (!(key in this))
+    for (const key in props) {
+      if (!(key in this)) {
         // @ts-ignore
         this[key] = props[key];
+      }
+    }
   }
 
   get stack() {
@@ -59,10 +61,12 @@ export class AssertionResult<T> implements Result {
   }
 
   constructor(props?: T, ssf?: Function) {
-    for (const key in props)
-      if (!(key in this))
+    for (const key in props) {
+      if (!(key in this)) {
         // @ts-ignore
         this[key] = props[key];
+      }
+    }
   }
 
   toJSON(): Record<string, unknown> {
@@ -72,9 +76,6 @@ export class AssertionResult<T> implements Result {
     }
   }
 }
-
-const x = new AssertionError<{has: true}>('hi', {has:true})
-x.has === true
 
 export const ok = <T extends {}>(val: T) => new AssertionResult<T>(val)
 export const error = <E extends {}>(message: string, val: E) => new AssertionError<E>(message, val)
