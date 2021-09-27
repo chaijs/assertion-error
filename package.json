@@ -26,9 +26,7 @@
     "scripts": {
         "build": "tsc",
         "pretest": "npm run build",
-        "test": "npm run test:node && npm run test:typescript",
-        "test:node": "NODE_ENV=test node ./test/index.js",
-        "test:typescript": "tsc test/typings.ts dist/index.d.ts --noEmit"
+        "test": "NODE_ENV=test node ./test/index.js"
     },
     "devDependencies": {
         "typescript": "^4.4.3"
