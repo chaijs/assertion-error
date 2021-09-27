@@ -2,7 +2,7 @@
  * Include lib
  */
 
-import AssertionError from '../dist/index.js'
+import {AssertionError} from '../dist/index.js'
 
 /*!
  * Simple test runner.

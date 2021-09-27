@@ -1,45 +1,81 @@
-export default class AssertionError<T> extends Error {
-  name = 'AssertionError'
-  showDiff: boolean
-  [key: string]: any
+const canElideFrames = 'captureStackTrace' in Error
+const startStackFrames = new WeakMap()
 
-  constructor(message: string, props?: T, ssf?: Function) {
+interface Result {
+  name: 'AssertionError' | 'AssertionResult'
+  ok: boolean
+  toJSON(...args: unknown[]): Record<string, unknown>
+}
+
+export class AssertionError<T> extends Error implements Result {
+  [key: string]: unknown
+
+  get name(): 'AssertionError' {
+    return 'AssertionError'
+  }
+
+  get ok() {
+    return false
+  }
+
+  constructor(public message = 'Unspecified AssertionError', props?: T, ssf?: Function) {
     super(message)
-
-    // default values
-    this.message = message || 'Unspecified AssertionError';
-    this.showDiff = false;
-
-    // copy from properties
-    for (var key in props) {
-      if (!(key in this)) {
+    if (canElideFrames && ssf) startStackFrames.set(this, ssf)
+    for (const key in props)
+      if (!(key in this))
         // @ts-ignore
         this[key] = props[key];
-      }
-    }
+  }
 
-    // capture stack trace
-    if ((Error as any).captureStackTrace) {
-      (Error as any).captureStackTrace(this, ssf || AssertionError);
+  get stack() {
+    if (canElideFrames) {
+      return (Error as any).captureStackTrace(this, startStackFrames.get(this) || AssertionError);
     } else {
-      try {
-        throw new Error();
-      } catch(e: any) {
-        this.stack = e.stack;
-      }
+      return super.stack
     }
   }
 
-  // Allow errors to be converted to JSON for static transfer.
   toJSON(stack: boolean): Record<string, unknown> {
-    const {...props} = this
-
-    // include stack if exists and not turned off
-    if (false !== stack && this.stack) {
-      props.stack = this.stack;
+    return {
+      ...this,
+      message: this.message,
+      ok: false,
+      // include stack if exists and not turned off
+      stack: stack !== false ? this.stack : undefined,
     }
-    props.message = this.message
+  }
 
-    return props;
-  };
 }
+
+export class AssertionResult<T> implements Result {
+  [key: string]: unknown
+
+  get name(): 'AssertionResult' {
+    return 'AssertionResult'
+  }
+
+  get ok() {
+    return true
+  }
+
+  constructor(props?: T, ssf?: Function) {
+    for (const key in props)
+      if (!(key in this))
+        // @ts-ignore
+        this[key] = props[key];
+  }
+
+  toJSON(): Record<string, unknown> {
+    return {
+      ...this,
+      ok: this.ok,
+    }
+  }
+}
+
+const x = new AssertionError<{has: true}>('hi', {has:true})
+x.has === true
+
+export const ok = <T extends {}>(val: T) => new AssertionResult<T>(val)
+export const error = <E extends {}>(message: string, val: E) => new AssertionError<E>(message, val)
+export default { ok, error }
