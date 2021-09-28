@@ -76,7 +76,3 @@ export class AssertionResult<T> implements Result {
     }
   }
 }
-
-export const ok = <T extends {}>(val: T) => new AssertionResult<T>(val)
-export const error = <E extends {}>(message: string, val: E) => new AssertionError<E>(message, val)
-export default { ok, error }
