@@ -40,6 +40,7 @@ export class AssertionError<T> extends Error implements Result {
   toJSON(stack: boolean): Record<string, unknown> {
     return {
       ...this,
+      name: this.name,
       message: this.message,
       ok: false,
       // include stack if exists and not turned off
@@ -72,6 +73,7 @@ export class AssertionResult<T> implements Result {
   toJSON(): Record<string, unknown> {
     return {
       ...this,
+      name: this.name,
       ok: this.ok,
     }
   }
