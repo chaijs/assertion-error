@@ -60,7 +60,7 @@ export class AssertionResult<T> implements Result {
     return true
   }
 
-  constructor(props?: T, ssf?: Function) {
+  constructor(props?: T) {
     for (const key in props) {
       if (!(key in this)) {
         // @ts-ignore
