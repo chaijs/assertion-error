@@ -10,7 +10,7 @@
     "allowSyntheticDefaultImports": true,
     "outDir": "dist"
   },
-  "include": [
-    "src"
+  "files": [
+    "./mod.ts"
   ]
 }

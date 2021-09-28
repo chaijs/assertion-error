@@ -4,7 +4,7 @@
     "description": "Error constructor for test and validation frameworks that implements standardized AssertionError specification.",
     "author": "Jake Luer <jake@qualiancy.com> (http://qualiancy.com)",
     "license": "MIT",
-    "types": "./dist/index.d.ts",
+    "types": "./dist/mod.d.ts",
     "keywords": [
         "test",
         "assertion",
@@ -21,8 +21,8 @@
         "dist"
     ],
     "type": "module",
-    "module": "./dist/index.js",
-    "main": "./dist/index.js",
+    "module": "./dist/mod.js",
+    "main": "./dist/mod.js",
     "scripts": {
         "build": "tsc",
         "pretest": "npm run build",
