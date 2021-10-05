@@ -58,6 +58,6 @@ $ npm install --save assertion-error
 
 `assertion_error` is available on [Deno.land](https://deno.land/x/assertion_error)
 
-```
+```typescript
 import {AssertionError, AssertionResult} from 'https://deno.land/x/assertion_error@2.0.0/mod.ts'
 ```
