@@ -1,6 +1,6 @@
 {
     "name": "assertion-error",
-    "version": "0.0,0-dev",
+    "version": "0.0.0-dev",
     "description": "Error constructor for test and validation frameworks that implements standardized AssertionError specification.",
     "author": "Jake Luer <jake@qualiancy.com> (http://qualiancy.com)",
     "license": "MIT",
