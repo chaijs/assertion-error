@@ -17,9 +17,6 @@
     "engines": {
         "node": ">=12"
     },
-    "files": [
-        "dist"
-    ],
     "type": "module",
     "module": "./index.js",
     "main": "./index.js",
