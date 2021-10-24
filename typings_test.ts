@@ -14,7 +14,9 @@ const assertionError: AssertionError<{ bar: number }> = new AssertionError(
   { bar: 42 },
 );
 const msg: string = assertionError.message;
-const bar: number = assertionError.bar;
+
+// @fixme - shouldnt need `as number`
+const bar: number = assertionError.bar as number;
 
 class DerivedAssertionError<T = {}> extends AssertionError<T> {
   public constructor(message: string, props?: T, ssf?: Function) {
