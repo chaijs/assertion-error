@@ -1,11 +1,7 @@
+import {Result} from './index.d.ts'
+
 const canElideFrames = "captureStackTrace" in Error;
 const startStackFrames = new WeakMap();
-
-interface Result {
-  name: "AssertionError" | "AssertionResult";
-  ok: boolean;
-  toJSON(...args: unknown[]): Record<string, unknown>;
-}
 
 export class AssertionError<T> extends Error implements Result {
   [key: string]: unknown
