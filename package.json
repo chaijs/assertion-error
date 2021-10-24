@@ -21,12 +21,13 @@
         "dist"
     ],
     "type": "module",
-    "module": "./dist/mod.js",
-    "main": "./dist/mod.js",
+    "module": "./index.js",
+    "main": "./index.js",
     "scripts": {
-        "build": "tsc",
-        "pretest": "npm run build",
-        "test": "NODE_ENV=test node ./test/index.js"
+        "build": "deno bundle mod.ts > index.js",
+        "pretest": "rm -rf coverage/",
+        "test": "deno test --coverage=coverage",
+        "posttest": "deno coverage coverage --lcov > coverage/lcov.info && lcov --summary coverage/lcov.info"
     },
     "devDependencies": {
         "typescript": "^4.4.3"
