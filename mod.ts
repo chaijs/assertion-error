@@ -37,7 +37,7 @@ export class AssertionError<T> extends Error implements Result {
     }
   }
 
-  toJSON(stack: boolean): Record<string, unknown> {
+  toJSON(stack?: boolean): Record<string, unknown> {
     return {
       ...this,
       name: this.name,
