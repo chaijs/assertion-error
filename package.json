@@ -17,9 +17,10 @@
   "engines": {
     "node": ">=12"
   },
+  "files": ["index.d.ts"],
   "type": "module",
-  "module": "./index.js",
-  "main": "./index.js",
+  "module": "index.js",
+  "main": "index.js",
   "scripts": {
     "build": "deno bundle mod.ts > index.js",
     "pretest": "rm -rf coverage/",
