@@ -28,6 +28,21 @@ test("AssertionError stack", function () {
   assert(typeof new AssertionError().stack === "string");
 });
 
+test("AssertionError stack elides ssf if provided", function () {
+  function foo() {
+    function bar() {
+      throw new AssertionError("error", {}, foo)
+    }
+    bar()
+  }
+  try {
+    foo()
+  } catch (e) {
+    assert(e.stack.includes("foo") === false)
+  }
+});
+
+
 test("AssertionError custom properties", () => {
   const err = new AssertionError("good message", {
     name: "ShouldNotExist",

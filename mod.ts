@@ -4,7 +4,6 @@ import { Result } from "./index.d.ts";
 type V8Error = ErrorConstructor & { captureStackTrace(err: Error, ssf: Function): void };
 
 const canElideFrames = "captureStackTrace" in Error;
-const startStackFrames = new WeakMap();
 
 export class AssertionError<T> extends Error implements Result {
   [key: string]: unknown
@@ -24,23 +23,18 @@ export class AssertionError<T> extends Error implements Result {
     ssf?: Function,
   ) {
     super(message);
-    if (canElideFrames && ssf) startStackFrames.set(this, ssf);
+    if (canElideFrames) {
+      (Error as V8Error).captureStackTrace(
+        this,
+        ssf || AssertionError,
+      );
+    }
     for (const key in props) {
       if (!(key in this)) {
         // @ts-ignore: allow arbitrary assignment of values onto class
         this[key] = props[key];
       }
     }
-  }
-
-  get stack() {
-    if (canElideFrames) {
-      (Error as V8Error).captureStackTrace(
-        this,
-        startStackFrames.get(this) || AssertionError,
-      );
-    }
-    return super.stack;
   }
 
   toJSON(stack?: boolean): Record<string, unknown> {
