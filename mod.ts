@@ -1,4 +1,4 @@
-import {Result} from './index.d.ts'
+import { Result } from "./index.d.ts";
 
 const canElideFrames = "captureStackTrace" in Error;
 const startStackFrames = new WeakMap();
