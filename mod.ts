@@ -1,43 +1,45 @@
-const canElideFrames = 'captureStackTrace' in Error
-const startStackFrames = new WeakMap()
+import { Result } from "./index.d.ts";
 
-interface Result {
-  name: 'AssertionError' | 'AssertionResult'
-  ok: boolean
-  toJSON(...args: unknown[]): Record<string, unknown>
-}
+type V8Error = ErrorConstructor & {
+  // deno-lint-ignore ban-types
+  captureStackTrace(err: Error, ssf: Function): void;
+};
+
+const canElideFrames = "captureStackTrace" in Error;
 
 export class AssertionError<T> extends Error implements Result {
   [key: string]: unknown
 
-  get name(): 'AssertionError' {
-    return 'AssertionError'
+  get name(): "AssertionError" {
+    return "AssertionError";
   }
 
   get ok() {
-    return false
+    return false;
   }
 
-  constructor(public message = 'Unspecified AssertionError', props?: T, ssf?: Function) {
-    super(message)
-    if (canElideFrames && ssf) startStackFrames.set(this, ssf)
+  constructor(
+    public message = "Unspecified AssertionError",
+    props?: T,
+    // deno-lint-ignore ban-types
+    ssf?: Function,
+  ) {
+    super(message);
+    if (canElideFrames) {
+      (Error as V8Error).captureStackTrace(
+        this,
+        ssf || AssertionError,
+      );
+    }
     for (const key in props) {
       if (!(key in this)) {
-        // @ts-ignore
+        // @ts-ignore: allow arbitrary assignment of values onto class
         this[key] = props[key];
       }
     }
   }
 
-  get stack() {
-    if (canElideFrames) {
-      return (Error as any).captureStackTrace(this, startStackFrames.get(this) || AssertionError);
-    } else {
-      return super.stack
-    }
-  }
-
-  toJSON(stack: boolean): Record<string, unknown> {
+  toJSON(stack?: boolean): Record<string, unknown> {
     return {
       ...this,
       name: this.name,
@@ -45,26 +47,25 @@ export class AssertionError<T> extends Error implements Result {
       ok: false,
       // include stack if exists and not turned off
       stack: stack !== false ? this.stack : undefined,
-    }
+    };
   }
-
 }
 
 export class AssertionResult<T> implements Result {
   [key: string]: unknown
 
-  get name(): 'AssertionResult' {
-    return 'AssertionResult'
+  get name(): "AssertionResult" {
+    return "AssertionResult";
   }
 
   get ok() {
-    return true
+    return true;
   }
 
   constructor(props?: T) {
     for (const key in props) {
       if (!(key in this)) {
-        // @ts-ignore
+        // @ts-ignore: allow arbitrary assignment of values onto class
         this[key] = props[key];
       }
     }
@@ -75,6 +76,6 @@ export class AssertionResult<T> implements Result {
       ...this,
       name: this.name,
       ok: this.ok,
-    }
+    };
   }
 }

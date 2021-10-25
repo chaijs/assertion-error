@@ -1,0 +1,42 @@
+name: Test Deno Module
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        deno-version: [1.15.2, canary]
+
+    steps:
+      - name: Git sources
+        uses: actions/checkout@v2
+
+      - name: Use Deno Version ${{ matrix.deno-version }}
+        uses: denoland/setup-deno@v1.1.0
+        with:
+          deno-version: ${{ matrix.deno-version }}
+
+      - name: Deno Check Fmt
+        run: deno fmt --check
+
+      - name: Deno Lint
+        run: deno lint
+
+      - name: Build Deno Module
+        run: deno bundle --reload mod.ts > index.js
+
+      - name: Test Deno Module
+        run: deno test --coverage=coverage
+
+      # TODO: coverage broken see https://github.com/denoland/deno/issues/11875
+      # - name: Generate lcov
+      #   run: deno coverage coverage --lcov > coverage/lcov.info
+      
+      # - name: Assert coverage is good
+      #   uses: VeryGoodOpenSource/very_good_coverage@v1.2.0

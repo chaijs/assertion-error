@@ -1,34 +1,30 @@
 {
-    "name": "assertion-error",
-    "version": "0.0.0-dev",
-    "description": "Error constructor for test and validation frameworks that implements standardized AssertionError specification.",
-    "author": "Jake Luer <jake@qualiancy.com> (http://qualiancy.com)",
-    "license": "MIT",
-    "types": "./dist/mod.d.ts",
-    "keywords": [
-        "test",
-        "assertion",
-        "assertion-error"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:chaijs/assertion-error.git"
-    },
-    "engines": {
-        "node": ">=12"
-    },
-    "files": [
-        "dist"
-    ],
-    "type": "module",
-    "module": "./dist/mod.js",
-    "main": "./dist/mod.js",
-    "scripts": {
-        "build": "tsc",
-        "pretest": "npm run build",
-        "test": "NODE_ENV=test node ./test/index.js"
-    },
-    "devDependencies": {
-        "typescript": "^4.4.3"
-    }
+  "name": "assertion-error",
+  "version": "0.0.0-dev",
+  "description": "Error constructor for test and validation frameworks that implements standardized AssertionError specification.",
+  "author": "Jake Luer <jake@qualiancy.com> (http://qualiancy.com)",
+  "license": "MIT",
+  "types": "./index.d.ts",
+  "keywords": [
+    "test",
+    "assertion",
+    "assertion-error"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:chaijs/assertion-error.git"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "files": ["index.d.ts"],
+  "type": "module",
+  "module": "index.js",
+  "main": "index.js",
+  "scripts": {
+    "build": "deno bundle mod.ts > index.js",
+    "pretest": "rm -rf coverage/",
+    "test": "deno test --coverage=coverage",
+    "posttest": "deno coverage coverage --lcov > coverage/lcov.info && lcov --summary coverage/lcov.info"
+  }
 }

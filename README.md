@@ -35,14 +35,15 @@ Both `AssertionError` and `AssertionResult` implement the `Result` interface:
 
 ```typescript
 interface Result {
-  name: 'AssertionError' | 'AssertionResult'
-  ok: boolean
-  toJSON(...args: unknown[]): Record<string, unknown>
+  name: "AssertionError" | "AssertionResult";
+  ok: boolean;
+  toJSON(...args: unknown[]): Record<string, unknown>;
 }
 ```
 
 So if a function returns `AssertionResult | AssertionError` it is easy to check
-_which_ one is returned by checking either `.name` or `.ok`, or check `instanceof Error`.
+_which_ one is returned by checking either `.name` or `.ok`, or check
+`instanceof Error`.
 
 ## Installation
 
@@ -56,8 +57,12 @@ $ npm install --save assertion-error
 
 ### Deno
 
-`assertion_error` is available on [Deno.land](https://deno.land/x/assertion_error)
+`assertion_error` is available on
+[Deno.land](https://deno.land/x/assertion_error)
 
 ```typescript
-import {AssertionError, AssertionResult} from 'https://deno.land/x/assertion_error@2.0.0/mod.ts'
+import {
+  AssertionError,
+  AssertionResult,
+} from "https://deno.land/x/assertion_error@2.0.0/mod.ts";
 ```
