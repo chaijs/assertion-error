@@ -1,7 +1,7 @@
 import { Result } from "./index.d.ts";
 
-// deno-lint-ignore ban-types
 type V8Error = ErrorConstructor & {
+  // deno-lint-ignore ban-types
   captureStackTrace(err: Error, ssf: Function): void;
 };
 
