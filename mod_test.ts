@@ -31,17 +31,16 @@ test("AssertionError stack", function () {
 test("AssertionError stack elides ssf if provided", function () {
   function foo() {
     function bar() {
-      throw new AssertionError("error", {}, foo)
+      throw new AssertionError("error", {}, foo);
     }
-    bar()
+    bar();
   }
   try {
-    foo()
+    foo();
   } catch (e) {
-    assert(e.stack.includes("foo") === false)
+    assert(e.stack.includes("foo") === false);
   }
 });
-
 
 test("AssertionError custom properties", () => {
   const err = new AssertionError("good message", {

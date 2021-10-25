@@ -1,7 +1,9 @@
 import { Result } from "./index.d.ts";
 
 // deno-lint-ignore ban-types
-type V8Error = ErrorConstructor & { captureStackTrace(err: Error, ssf: Function): void };
+type V8Error = ErrorConstructor & {
+  captureStackTrace(err: Error, ssf: Function): void;
+};
 
 const canElideFrames = "captureStackTrace" in Error;
 

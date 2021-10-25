@@ -19,8 +19,8 @@ const msg: string = assertionError.message;
 // @fixme - shouldnt need `as number`
 const bar: number = assertionError.bar as number;
 
-class DerivedAssertionError<T = Record<string, unknown>> extends AssertionError<T> {
-
+class DerivedAssertionError<T = Record<string, unknown>>
+  extends AssertionError<T> {
   // deno-lint-ignore ban-types
   public constructor(message: string, props?: T, ssf?: Function) {
     super(message, props, ssf);
