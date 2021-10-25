@@ -31,8 +31,9 @@ jobs:
       - name: Test Deno Module
         run: deno test --coverage=coverage
 
-      - name: Generate lcov
-        run: deno coverage coverage --lcov > coverage/lcov.info
+      # TODO: coverage broken see https://github.com/denoland/deno/issues/11875
+      # - name: Generate lcov
+      #   run: deno coverage coverage --lcov > coverage/lcov.info
       
-      - name: Assert coverage is good
-        uses: VeryGoodOpenSource/very_good_coverage@v1.2.0
+      # - name: Assert coverage is good
+      #   uses: VeryGoodOpenSource/very_good_coverage@v1.2.0
