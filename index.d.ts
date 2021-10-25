@@ -9,6 +9,7 @@ declare class AssertionError<T> extends Error implements Result {
   name: "AssertionError";
   ok: false;
   message: string;
+  // deno-lint-ignore ban-types
   constructor(message: string, props?: T, ssf?: Function);
   stack: string;
   toJSON(stack?: boolean): Record<string, unknown>;

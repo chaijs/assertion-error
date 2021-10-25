@@ -1,5 +1,8 @@
 import { Result } from "./index.d.ts";
 
+// deno-lint-ignore ban-types
+type V8Error = ErrorConstructor & { captureStackTrace(err: Error, ssf: Function): void };
+
 const canElideFrames = "captureStackTrace" in Error;
 const startStackFrames = new WeakMap();
 
@@ -17,13 +20,14 @@ export class AssertionError<T> extends Error implements Result {
   constructor(
     public message = "Unspecified AssertionError",
     props?: T,
+    // deno-lint-ignore ban-types
     ssf?: Function,
   ) {
     super(message);
     if (canElideFrames && ssf) startStackFrames.set(this, ssf);
     for (const key in props) {
       if (!(key in this)) {
-        // @ts-ignore
+        // @ts-ignore: allow arbitrary assignment of values onto class
         this[key] = props[key];
       }
     }
@@ -31,13 +35,12 @@ export class AssertionError<T> extends Error implements Result {
 
   get stack() {
     if (canElideFrames) {
-      return (Error as any).captureStackTrace(
+      (Error as V8Error).captureStackTrace(
         this,
         startStackFrames.get(this) || AssertionError,
       );
-    } else {
-      return super.stack;
     }
+    return super.stack;
   }
 
   toJSON(stack?: boolean): Record<string, unknown> {
@@ -66,7 +69,7 @@ export class AssertionResult<T> implements Result {
   constructor(props?: T) {
     for (const key in props) {
       if (!(key in this)) {
-        // @ts-ignore
+        // @ts-ignore: allow arbitrary assignment of values onto class
         this[key] = props[key];
       }
     }

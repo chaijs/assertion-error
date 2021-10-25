@@ -1,13 +1,14 @@
+// deno-lint-ignore-file no-unused-vars
+
 import { AssertionError } from "./mod.ts";
 
-const str: string = "";
-let e;
+let e: AssertionError<unknown> | null;
 
 function foo() {}
 
-e = new AssertionError(str);
-e = new AssertionError(str, { a: 1, b: 2 });
-e = new AssertionError(str, { a: 1, b: 2 }, foo);
+e = new AssertionError("");
+e = new AssertionError("", { a: 1, b: 2 });
+e = new AssertionError("", { a: 1, b: 2 }, foo);
 
 const assertionError: AssertionError<{ bar: number }> = new AssertionError(
   "msg",
@@ -18,7 +19,9 @@ const msg: string = assertionError.message;
 // @fixme - shouldnt need `as number`
 const bar: number = assertionError.bar as number;
 
-class DerivedAssertionError<T = {}> extends AssertionError<T> {
+class DerivedAssertionError<T = Record<string, unknown>> extends AssertionError<T> {
+
+  // deno-lint-ignore ban-types
   public constructor(message: string, props?: T, ssf?: Function) {
     super(message, props, ssf);
   }

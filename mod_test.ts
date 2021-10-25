@@ -7,7 +7,7 @@ import { assert } from "https://deno.land/std@0.112.0/testing/asserts.ts";
 const { test } = Deno;
 
 test("AssertionError construction", () => {
-  var err = new AssertionError();
+  const err = new AssertionError();
   assert(err instanceof Error, "instanceof Error");
   assert(err instanceof AssertionError, "instanceof AssertionError");
   assert(
@@ -18,7 +18,7 @@ test("AssertionError construction", () => {
 });
 
 test("AssertionError message", () => {
-  var err = new AssertionError("Oops."),
+  const err = new AssertionError("Oops."),
     empty = new AssertionError();
   assert(err.message === "Oops.", "w/ err.message");
   assert(empty.message === "Unspecified AssertionError", "w/o err.message");
@@ -29,7 +29,7 @@ test("AssertionError stack", function () {
 });
 
 test("AssertionError custom properties", () => {
-  var err = new AssertionError("good message", {
+  const err = new AssertionError("good message", {
     name: "ShouldNotExist",
     ok: true,
     hello: "universe",
@@ -52,12 +52,12 @@ test("AssertionError custom properties", () => {
 });
 
 test("AssertionError .toJSON()", () => {
-  var err = new AssertionError("some message", {
+  const err = new AssertionError("some message", {
     hello: "universe",
     goodbye: "known",
   });
 
-  var json = err.toJSON();
+  const json = err.toJSON();
 
   assert(json.name === "AssertionError", "json has name");
   assert(json.ok === false, "json has ok");
@@ -72,12 +72,12 @@ test("AssertionError .toJSON()", () => {
     assert("string" === typeof json.stack, "json has stack");
   }
 
-  var nostack = err.toJSON(false);
+  const nostack = err.toJSON(false);
   assert(!nostack.stack, "no stack on false argument");
 });
 
 test("AssertionResult construction", () => {
-  var res = new AssertionResult();
+  const res = new AssertionResult();
   assert(res instanceof Error === false, "not instanceof Error");
   assert(res instanceof AssertionResult, "instanceof AssertionResult");
   assert(
@@ -88,17 +88,17 @@ test("AssertionResult construction", () => {
 });
 
 test("AssertionResult message", () => {
-  var res = new AssertionResult("Oops.");
+  const res = new AssertionResult("Oops.");
   assert("message" in res === false, "has no message prop");
 });
 
 test("AssertionResult stack", function () {
-  var res = new AssertionResult();
+  const res = new AssertionResult();
   assert("stack" in res === false, "has no stack");
 });
 
 test("AssertionResult custom properties", () => {
-  var res = new AssertionResult({
+  const res = new AssertionResult({
     name: "ShouldNotExist",
     ok: false,
     hello: "universe",
@@ -114,12 +114,12 @@ test("AssertionResult custom properties", () => {
 });
 
 test("AssertionResult .toJSON()", () => {
-  var res = new AssertionResult({
+  const res = new AssertionResult({
     hello: "universe",
     goodbye: "known",
   });
 
-  var json = res.toJSON();
+  const json = res.toJSON();
 
   assert(json.name === "AssertionResult", "json has name");
   assert(json.ok === true, "json has ok");
