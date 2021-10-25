@@ -24,7 +24,6 @@
   "scripts": {
     "build": "deno bundle mod.ts > index.js",
     "pretest": "rm -rf coverage/",
-    "test": "deno test --coverage=coverage",
-    "posttest": "deno coverage coverage --lcov > coverage/lcov.info && lcov --summary coverage/lcov.info"
+    "test": "deno test --coverage=coverage"
   }
 }
