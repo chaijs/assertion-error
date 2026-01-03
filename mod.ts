@@ -8,7 +8,7 @@ type V8Error = ErrorConstructor & {
 const canElideFrames = "captureStackTrace" in Error;
 
 export class AssertionError<T> extends Error implements Result {
-  [key: string]: unknown
+  [key: string]: unknown;
 
   override get name(): "AssertionError" {
     return "AssertionError";
@@ -52,7 +52,7 @@ export class AssertionError<T> extends Error implements Result {
 }
 
 export class AssertionResult<T> implements Result {
-  [key: string]: unknown
+  [key: string]: unknown;
 
   get name(): "AssertionResult" {
     return "AssertionResult";

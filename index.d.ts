@@ -5,7 +5,7 @@ interface Result {
 }
 
 declare class AssertionError<T> extends Error implements Result {
-  [key: string]: unknown
+  [key: string]: unknown;
   name: "AssertionError";
   ok: false;
   message: string;
@@ -16,7 +16,7 @@ declare class AssertionError<T> extends Error implements Result {
 }
 
 declare class AssertionResult<T> implements Result {
-  [key: string]: unknown
+  [key: string]: unknown;
   name: "AssertionResult";
   ok: true;
   message: string;
