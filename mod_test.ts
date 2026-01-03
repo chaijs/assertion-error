@@ -38,7 +38,7 @@ test("AssertionError stack elides ssf if provided", function () {
   try {
     foo();
   } catch (e) {
-    assert(e.stack.includes("foo") === false);
+    assert((e as Error).stack?.includes("foo") === false);
   }
 });
 

@@ -10,7 +10,7 @@ const canElideFrames = "captureStackTrace" in Error;
 export class AssertionError<T> extends Error implements Result {
   [key: string]: unknown
 
-  get name(): "AssertionError" {
+  override get name(): "AssertionError" {
     return "AssertionError";
   }
 
@@ -19,7 +19,7 @@ export class AssertionError<T> extends Error implements Result {
   }
 
   constructor(
-    public message = "Unspecified AssertionError",
+    public override message = "Unspecified AssertionError",
     props?: T,
     // deno-lint-ignore ban-types
     ssf?: Function,
