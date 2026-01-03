@@ -3,7 +3,7 @@
  */
 
 import { AssertionError, AssertionResult } from "./mod.ts";
-import { assert } from "https://deno.land/std@0.112.0/testing/asserts.ts";
+import { assert } from "@std/assert";
 const { test } = Deno;
 
 test("AssertionError construction", () => {
