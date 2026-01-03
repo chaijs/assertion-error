@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        deno-version: [1.15.2, canary]
+        deno-version: [2.6.3, canary]
 
     steps:
       - name: Git sources
