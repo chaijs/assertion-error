@@ -11,4 +11,3 @@ deploy:
     tags: true
     repo: chaijs/assertion-error
     all_branches: true
-

@@ -23,6 +23,8 @@
   "main": "index.js",
   "scripts": {
     "build": "deno bundle mod.ts > index.js",
+    "format": "deno fmt",
+    "lint": "deno lint",
     "pretest": "rm -rf coverage/",
     "test": "deno test --coverage=coverage"
   }
