@@ -1,3 +1,10 @@
+### Note
+
+As of 2.0.0, the History.md file has been deprecated. Please refer to the
+[full commit logs available on GitHub](https://github.com/chaijs/assertion-error/commits/).
+
+---
+
 # 1.1.0 / 2018-01-02
 
 - Add type definitions
